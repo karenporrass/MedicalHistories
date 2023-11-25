@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
+use App\Traits\EmailTrait;
+
 
 class User extends Authenticatable
 {
-    use HasApiTokens, SoftDeletes, HasFactory, Notifiable;
-
+    use HasApiTokens, HasFactory, HasRoles, Notifiable, SoftDeletes, EmailTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -55,5 +57,15 @@ class User extends Authenticatable
     public function medicalHistories(): HasOne
     {
         return $this->hasOne(History::class);
+    }
+
+
+
+    /**
+     * @return void
+     */
+    public function sendEmails($to, $email)
+    {
+        $this->sendEmail($to, $email);
     }
 }

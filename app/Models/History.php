@@ -63,6 +63,6 @@ class History extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'patient_document', 'document_number');
+        return $this->belongsTo(User::class);
     }
 }
