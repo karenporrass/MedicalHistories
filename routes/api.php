@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\HistoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'users', 'controller' => UserController::class], function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::put('/{user}', 'updateProfile');
+});
+
+Route::group(['prefix' => 'histories', 'controller' => HistoryController::class], function () {
+    Route::post('/', 'store');
+    Route::put('/{history}', 'update');
 });

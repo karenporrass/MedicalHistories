@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('professional_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('patient_document')->constrained('users')->onDelete('cascade');
             $table->integer('code_history')->unique();
-            $table->integer('code_history');
+            $table->integer('review');
             $table->text('state_patient');
             $table->text('health_history');
             $table->timestamps();
