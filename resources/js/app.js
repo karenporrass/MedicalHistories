@@ -10,7 +10,8 @@ import BackendError from './Errors/BackendError.vue'
 const app = createApp({
 	components: {
 		HistoriesProfessional,
-		HistoriesPatient
+		HistoriesPatient,
+		Users
 	}
 })
 app.component('backend-error', BackendError)

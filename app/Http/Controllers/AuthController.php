@@ -82,46 +82,7 @@ class AuthController extends controller
 
     public function logout()
     {
-        /** @var \App\Models\User\User $user */
-        $user = Auth::user();
-        $user->tokens()->delete();
-        return response()->json([], 204);
+        Auth::logout();
+        return view('auth.login');
     }
-
-    // public function forgotPassword(Request $request)
-    // {
-    //     $request->validate(['document_number' => ['required', 'exists:App\Models\User,document_number']], [
-    //         'docuement_number.exists' => 'El numero de docuemento proporcionado no existe.',
-    //     ]);
-    //     $user = User::where('document_number', $request->document_number)->first();
-    //     $token = Str::random(64);
-    //     DB::table('password_reset_tokens')->insert([
-    //         'document_number' => $request->document_number,
-    //         'token' => $token,
-    //         'created_at' => Carbon::now(),
-    //     ]);
-
-    //     return redirect()->back()->with('message', 'Se ha enviado el correo correctamente!');
-    // }
-
-
-
-
-    // public function getUser(): JsonResponse
-    // {
-    //     $user = Auth::user();
-    //     if (!$user) {
-    //         return response()->json([
-    //             'user' => false,
-    //             'exists' => false,
-    //         ], 200);
-    //     }
-
-    //     return response()->json([
-    //         'user' => $user,
-    //         'exists' => true,
-    //     ], 200);
-    // }
-
-
 }

@@ -19,9 +19,7 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                Historias Medicas
-            </a>
+            <h2 class="fw-bolder">Historias Medicas</h2>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="{{ __('Toggle navigation') }}">
@@ -30,11 +28,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
 
-                </ul>
-
-                <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     @guest
@@ -56,22 +50,23 @@
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('medical.user.edit-profile') }}">
-                                    Perfil
-                                </a>
-
-                                <a class="dropdown-item" href="{{ route('auth.logout') }}"
-                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                            <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="navbarDropdown">
+                                <form action="{{ route('medical.user.edit-profile') }}" method="POST">
                                     @csrf
+                                    <button type="submit"
+                                        class="btn btn-outline-primary rounded-pill mt-2">Configuracion</button>
                                 </form>
+
+                                <form action="{{ route('auth.logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-primary rounded-pill mt-2">Logout</button>
+                                </form>
+
+
                             </div>
                         </li>
+
+
                     @endguest
                 </ul>
             </div>

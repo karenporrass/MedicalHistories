@@ -43,16 +43,25 @@ class HistoryController extends Controller
         $history = new History($data);
         $history->save();
 
-        return response()->json(['status' => true, 'history' => $history], 200);
+        return response()->json(['status' => true, 'saved' => true, 'history' => $history], 200);
     }
-    /**
-     * Update the specified resource in storage.
-     */
+
+
     public function update(Request $request,  $id)
     {
         $history = History::findOrFail($id);
         $history->update(['review' => $request->input('review')]);
 
-        return response()->json(['status' => true, 'history' => $history], 200);
+        return response()->json(['status' => true, 'saved' => true, 'history' => $history], 200);
+    }
+
+
+
+    public function create(Request $request)
+    {
+        $history = new History($request->all());
+        $history->save();
+
+        return response()->json(['status' => 'History created', 'history' => $history], 201);
     }
 }

@@ -92,15 +92,10 @@
 					"/history/save",
 					history_info.value
 				);
-				if (response.data.saved) {
-					emit("updateTable");
+				document.value = null;
+				history_info.value = {};
+				if (response.data.saved == true) {
 					Swal.fire({ title: "Historia Creada", icon: "success" });
-					Object.assign(history_info.value, {
-						patient_id: "",
-						review: 0,
-						state_patient: "",
-						health_history: "",
-					});
 				}
 			} catch (error) {
 				errors.value = error;

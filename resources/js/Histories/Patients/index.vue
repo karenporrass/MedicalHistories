@@ -67,12 +67,11 @@
 			const response = await axios.put(`/history/update/${id}`, {
 				review: 1,
 			});
-			if (response.data.saved) {
+			if (response.data.saved == true) {
 				Swal.fire({
 					title: "La historia se marco como asistida",
 					icon: "success",
 				});
-				console.log("edite");
 			}
 		} catch (error) {
 			errors.value = error;

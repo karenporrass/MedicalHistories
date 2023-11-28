@@ -12,35 +12,33 @@ class RoleAndPermissionSeeder extends Seeder
     public function run(): void
     {
 
-        $patientPermissions = [
-            Permission::create(['name' => 'medical.history:read patient']),
-            Permission::create(['name' => 'medical.history:update']),
-            Permission::create(['name' => 'medical.user:create']),
-            Permission::create(['name' => 'medical.user:read profile']),
-            Permission::create(['name' => 'medical.user:update']),
-
-
+        $permissionPatient = [
+            'history.patient',
+            'history.patient.show',
+            'history.update',
+            'user.get.update',
+            'user.update',
         ];
-
-        $professionalPermissions = array_merge(
-            [
-                Permission::create(['name' => 'medical.history:read professional']),
-                Permission::create(['name' => 'medical.user:read user']),
-                Permission::create(['name' => 'medical.history:create']),
-                Permission::create(['name' => 'medical.user:read']),
-
-            ],
-            $patientPermissions,
-
-        );
+        $permissionProfessional = array_merge([
+            'history.professional',
+            'history.professional.show',
+            'history.store',
+            'user.get.professional',
+            'user.store',
+        ], $permissionPatient);
 
 
-        $patient = $patientPermissions;
-        $rolePatient = Role::create(['name' => 'patient']);
-        $rolePatient->syncPermissions($patient);
+        $professional = Role::create(['name' => 'professional']);
+        $patient = Role::create(['name' => 'patient']);
 
-        $professional = $professionalPermissions;
-        $roleProfessional = Role::create(['name' => 'professional']);
-        $roleProfessional->syncPermissions($professional);
+        foreach ($permissionProfessional as $permission) {
+            $permission = Permission::create(['name' => $permission]);
+            $professional->givePermissionTo($permission);
+        }
+
+        foreach ($permissionPatient as $permission) {
+            $permission = Permission::where(['name' => $permission])->first();
+            $patient->givePermissionTo($permission);
+        }
     }
 }

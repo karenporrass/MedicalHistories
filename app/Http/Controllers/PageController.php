@@ -15,7 +15,7 @@ class PageController extends Controller
         } elseif ($user == 'patient') {
             return redirect()->route('medical.history.histories-patient');
         } else {
-            return view('welcome');
+            return view('auth.login');
         }
     }
 }

@@ -24,6 +24,7 @@ class UserController extends Controller
 
         return response()->json(['users' => $users], 200);
     }
+
     public function user($user)
     {
         $user = User::where('document_number', "=", $user)->get();
@@ -74,36 +75,50 @@ class UserController extends Controller
             ], 500);
         }
     }
-    public function create(Request $request)
-    {
-        $user = new User($request->all());
-        $user->save();
-        $role = Role::where('name', $request->type)->first();
-        if ($role) {
-            $user->assignRole($role);
-        } else {
-            return response()->json(['error' => 'El rol no existe.'], 404);
-        }
-        return back()->with('success', 'User created');
-
-        return response()->json(['status' => 'User created', 'user' => $user], 201);
-    }
 
     public function editProfile()
     {
-        dd('Holaa');
-        $user = Auth::user();
-        $userInformation = User::where($user->id)->get();
+        $user_information = Auth::user();
         return view('pages.profile', compact('user_information'));
     }
 
-
-    public function updateProfile(UserRequest $request)
+    public function updateProfile(Request $request,  $id)
     {
-        $user = Auth::user();
-        $userInformation = User::find($user->id);
-        $userInformation->update($request->except('_token'));
+        $user = User::findOrFail($id);
 
-        return redirect()->back()->with('message', 'información personal guardada');
+        $user->update($request->all());
+
+        return response()->json(['status' => true, 'saved' => true, 'user' => $user], 200);
+    }
+
+
+    public function create(Request $request)
+    {
+        $user = new User($request->all());
+        $user->password = Hash::make($request->document_number);
+        $user->save();
+
+        $role = Role::where('name', $request->type)->first();
+        if ($role) {
+            $user->assignRole($role);
+            return response()->json(['status' => 'User created', 'user' => $user], 201);
+        } else {
+            $user->delete();
+            return response()->json(['error' => 'El rol no existe.'], 422);
+        }
+    }
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->update($request->all());
+
+        $role = Role::where('name', $request->type)->first();
+        if ($role) {
+            $user->syncRoles([$role->name]);
+        } else {
+            return response()->json(['error' => 'El rol no existe.'], 422);
+        }
+
+        return response()->json(['status' => 'User updated', 'user' => $user], 200);
     }
 }

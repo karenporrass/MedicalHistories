@@ -12,30 +12,30 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = new User([
-            'document_number' => '1093221111',
-            'name' => 'David',
+            'document_number' => '110009394',
+            'name' => 'Maria',
             'last_name' => 'Torres',
-            'phone' => 'Torres',
-            'address' => 'Torres',
+            'phone' => '312425236',
+            'address' => 'Santander',
             'type' => 'professional',
-            'email' => 'fernando.zapata.live@gmail.com',
-            'password' => bcrypt('12345678'),
+            'email' => 'mariatorres11@gmail.com',
+            'password' => bcrypt('110009394'),
             'remember_token' => Str::random(10),
         ]);
         $user->save();
         $user->assignRole('professional');
         $patient = new User([
-            'document_number' => '1011',
-            'name' => 'maria',
+            'document_number' => '101110',
+            'name' => 'Ana',
             'last_name' => 'velez',
-            'phone' => '111',
-            'address' => '111',
+            'phone' => '57347791',
+            'address' => 'Bucaramanga',
             'type' => 'patient',
-            'email' => 'maria.zapa@gmail.com',
-            'password' => bcrypt('12345'),
+            'email' => 'maria.velez@gmail.com',
+            'password' => bcrypt('101110'),
             'remember_token' => Str::random(10),
         ]);
         $patient->save();
-        $patient->assignRole('professional');
+        $patient->assignRole('patient');
     }
 }
