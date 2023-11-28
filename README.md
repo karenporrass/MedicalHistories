@@ -24,11 +24,11 @@ git clone https://github.com/karenporrass/MedicalHistories.git
 Backend (Laravel):
 
 ```bash
-composer install
+cp .env.example .env
 ```
 
 ```bash
-cp .env.example .env
+composer install
 ```
 
 ```bash
