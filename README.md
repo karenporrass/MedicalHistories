@@ -1,24 +1,45 @@
+# Medical Histories
+
 Este proyecto utiliza Laravel y Vue.js. Aquí hay una guía general que puedes
-seguir:
+seguir
 
-Pasos Generales: Clonar el Repositorio:
+## Variables
 
-bash Copy code git clone <URL
-https://github.com/karenporrass/MedicalHistories.git> Instalar Dependencias del
-Proyecto:
+`APP_NAME=HistoriasMedicas`
 
-Para el backend (Laravel):
+`DB_CONNECTION=mysql`
 
-bash Copy code composer install cp .env.example .env php artisan key:generate
+`DB_DATABASE=medicalhistories`
 
-Para el frontend (Vue.js): bash Copy code npm install Configurar la Base de
-Datos:
+## Pasos Generales
 
-Configura tu archivo .env con la información de la base de datos. Copy code php
-artisan migrate phpartisan db:seed
+Clonar el Repositorio:
 
-Inizializar
+```bash
+git clone <URL https://github.com/karenporrass/MedicalHistories.git>
+```
 
-Copy code php artisan serve
+##
 
-Copy code npm run serve
+Backend (Laravel):
+
+```bash
+composer install
+```
+
+```bash
+cp .env.example .env
+```
+
+```bash
+
+php artisan key:generate
+```
+
+##
+
+Frontend (Vue.js)
+
+```bash
+npm install
+```
