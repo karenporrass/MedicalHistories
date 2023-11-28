@@ -38,8 +38,33 @@ php artisan key:generate
 
 ##
 
+Migraciones y seeders
+
+```bash
+php artisan migrate
+```
+
+```bash
+php artisan db:seed
+
+```
+
+##
+
 Frontend (Vue.js)
 
 ```bash
 npm install
+```
+
+##
+
+Ejecurtar Proyecto
+
+```bash
+php artisan serve
+```
+
+```bash
+npm run dev
 ```
