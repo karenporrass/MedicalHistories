@@ -45,7 +45,7 @@ class Kernel extends HttpKernel
         ],
     ];
 
-     /**
+    /**
      * The application's middleware aliases.
      *
      * Aliases may be used instead of class names to conveniently assign middleware to routes and groups.
@@ -86,7 +86,6 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
-        'password_expired' => \App\Http\Middleware\PasswordExpired::class,
+            'password_expired' => \App\Http\Middleware\PasswordExpired::class,
     ];
 }

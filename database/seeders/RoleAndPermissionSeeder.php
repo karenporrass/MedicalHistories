@@ -24,8 +24,8 @@ class RoleAndPermissionSeeder extends Seeder
 
         $professionalPermissions = array_merge(
             [
-
                 Permission::create(['name' => 'medical.history:read professional']),
+                Permission::create(['name' => 'medical.user:read user']),
                 Permission::create(['name' => 'medical.history:create']),
                 Permission::create(['name' => 'medical.user:read']),
 

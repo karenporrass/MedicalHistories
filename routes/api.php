@@ -18,7 +18,7 @@ use App\Http\Controllers\UserController;
 
 Route::group(['prefix' => 'users', 'controller' => UserController::class], function () {
     Route::get('/', 'index');
-    Route::post('/', 'store');
+    Route::post('/', 'create');
     Route::put('/{user}', 'updateProfile');
 });
 

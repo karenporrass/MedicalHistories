@@ -44,7 +44,6 @@ class UserRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore(Auth::user()->document_number, 'document_number'),
             ],
             'password' => [
                 'max:45',
@@ -60,7 +59,7 @@ class UserRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('users')->ignore(Auth::user()->document_number, 'document_number'),
+                'unique:users'
             ],
         ];
     }

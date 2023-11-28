@@ -24,6 +24,11 @@ class UserController extends Controller
 
         return response()->json(['users' => $users], 200);
     }
+    public function user($user)
+    {
+        $user = User::where('document_number', "=", $user)->get();
+        return response()->json(['users' => $user], 200);
+    }
 
 
     public function store(UserRequest $request)
@@ -69,12 +74,27 @@ class UserController extends Controller
             ], 500);
         }
     }
-
-    public function editProfile(): view
+    public function create(Request $request)
     {
+        $user = new User($request->all());
+        $user->save();
+        $role = Role::where('name', $request->type)->first();
+        if ($role) {
+            $user->assignRole($role);
+        } else {
+            return response()->json(['error' => 'El rol no existe.'], 404);
+        }
+        return back()->with('success', 'User created');
+
+        return response()->json(['status' => 'User created', 'user' => $user], 201);
+    }
+
+    public function editProfile()
+    {
+        dd('Holaa');
         $user = Auth::user();
         $userInformation = User::where($user->id)->get();
-        return view('profile.profile', compact('user_information'));
+        return view('pages.profile', compact('user_information'));
     }
 
 

@@ -11,21 +11,36 @@ class HistoryController extends Controller
 {
     public function HistoriesProfessional()
     {
-        $user = Auth::user();
-        $histories = History::where('professional_id', '=', $user->id)->get();
-        return view('profesional.histories.show', compact('histories'));
+        $users = Auth::user();
+        $histories = History::with('patient')->where('professional_id', $users->id)->get();
+        return view('pages.historiesProfessional', compact('histories'));
+    }
+    public function HistoriesProfessionalShow()
+    {
+        $users = Auth::user();
+        $histories = History::with('patient')->where('professional_id', $users->id)->get();
+        return response()->json(['status' => true, $histories], 200);
     }
 
     public function HistoriesPatient()
     {
         $user = Auth::user();
-        $histories = History::where('patient_id', '=', $user->id)->get();
-        return view('patient.histories.show', compact('histories'));
+        $histories = History::with('patient')->where('patient_id', $user->id)->get();
+        return view('pages.historiesPatient', compact('histories'));
+    }
+    public function HistoriesPatientShow()
+    {
+        $user = Auth::user();
+        $histories = History::with('patient')->where('patient_id', $user->id)->get();
+        return response()->json(['status' => true, $histories], 200);
     }
 
     public function store(HistoryRequest $request)
     {
-        $history = new History($request->all());
+        $user = Auth::user();
+        $data = $request->all();
+        $data['professional_id'] = $user->id;
+        $history = new History($data);
         $history->save();
 
         return response()->json(['status' => true, 'history' => $history], 200);
@@ -33,9 +48,10 @@ class HistoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, History $history)
+    public function update(Request $request,  $id)
     {
-        $history->update($request->all());
+        $history = History::findOrFail($id);
+        $history->update(['review' => $request->input('review')]);
 
         return response()->json(['status' => true, 'history' => $history], 200);
     }

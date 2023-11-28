@@ -1,0 +1,10 @@
+/* En tu archivo de estilos CSS o en el estilo dentro de tu plantilla Blade */
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+
+#app {
+	height: 100%;
+}

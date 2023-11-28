@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('professional_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('patient_document')->constrained('users')->onDelete('cascade');
+            $table->foreignId('patient_id')->constrained('users')->onDelete('cascade');
             $table->integer('code_history')->unique();
-            $table->integer('review');
+            $table->integer('review')->default(0);
             $table->text('state_patient');
             $table->text('health_history');
             $table->timestamps();

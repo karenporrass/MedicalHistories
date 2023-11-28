@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use App\Traits\EmailTrait;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -26,7 +26,7 @@ class User extends Authenticatable
         'name',
         'last_name',
         'phone',
-        'adrees',
+        'address',
         'type',
         'email',
         'password',
@@ -52,20 +52,27 @@ class User extends Authenticatable
     ];
 
     /**
-     * medicalHistories
+     * professionalHistories
      */
-    public function medicalHistories(): HasOne
+    public function professionalHistories(): HasMany
     {
-        return $this->hasOne(History::class);
+        return $this->hasMany(History::class, 'professional_id', 'id');
     }
-
-
-
     /**
-     * @return void
+     * patientHistories
      */
-    public function sendEmails($to, $email)
+    public function patientHistories(): HasMany
     {
-        $this->sendEmail($to, $email);
+        return $this->hasMany(History::class, 'patient_id', 'id');
     }
+
+
+
+    // /**
+    //  * @return void
+    //  */
+    // public function sendEmails($to, $email)
+    // {
+    //     $this->sendEmail($to, $email);
+    // }
 }

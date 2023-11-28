@@ -18,8 +18,9 @@ class History extends Model
      */
     protected $fillable = [
         'professional_id',
-        'patient_document',
+        'patient_id',
         'state_patient',
+        'review',
         'health_history',
     ];
 
@@ -59,10 +60,17 @@ class History extends Model
 
 
     /**
-     * user
+     * professional
      */
-    public function user(): BelongsTo
+    public function professional(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'professional_id', 'id');
+    }
+    /**
+     * patient
+     */
+    public function patient(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'patient_id', 'id');
     }
 }
