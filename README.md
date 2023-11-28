@@ -16,7 +16,7 @@ seguir
 Clonar el Repositorio:
 
 ```bash
-git clone <URL https://github.com/karenporrass/MedicalHistories.git>
+git clone https://github.com/karenporrass/MedicalHistories.git
 ```
 
 ##
