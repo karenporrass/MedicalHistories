@@ -98,7 +98,11 @@
 					Swal.fire({ title: "Historia Creada", icon: "success" });
 				}
 			} catch (error) {
-				errors.value = error;
+				Swal.fire({
+					title: "No se puede crear la historia",
+					text: "Revise todos los campos",
+					icon: "error",
+				});
 			} finally {
 				user.value = "";
 				getHistories();

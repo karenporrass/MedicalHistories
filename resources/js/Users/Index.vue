@@ -94,14 +94,18 @@
 				`/user/update/${info_user.value.id}`,
 				info_user.value
 			);
-			if (response.data.saved == true) {
+			if (response.data.saved) {
 				Swal.fire({
 					title: "Se actualizo La informacion",
 					icon: "success",
 				});
-			}
+			} 
 		} catch (error) {
-			return error;
+			Swal.fire({
+				title: "No se puede actualizar",
+				text: "Revise todos los campos",
+				icon: "error",
+			});
 		}
 	}
 </script>

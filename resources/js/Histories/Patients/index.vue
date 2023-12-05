@@ -26,7 +26,7 @@
 											<td>{{ history.health_history }}</td>
 											<td>
 												<div class='actions'>
-													<a v-if="history.review == 1">
+													<a @click='alert' v-if="history.review == 1">
 														📌</a>
 
 													<a v-else href='#' @click='updateHistory(history.id), review = 1'>
@@ -81,6 +81,13 @@
 		}
 	}
 
+	function alert() {
+		Swal.fire({
+			title: "No se puede desmarcar la historia",
+			icon: "warning",
+		});
+    }
+    
 	async function getHistories() {
 		const { data } = await axios.get(`/history/histories-patient-show`);
 		histories.value = data[0];
