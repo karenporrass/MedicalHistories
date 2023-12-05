@@ -74,7 +74,10 @@
 				});
 			}
 		} catch (error) {
-			errors.value = error;
+			Swal.fire({
+				title: "No se puede desmarcar la historia",
+				icon: "error",
+			});
 		} finally {
 			review.value = null;
 			getHistories();
@@ -86,8 +89,8 @@
 			title: "No se puede desmarcar la historia",
 			icon: "warning",
 		});
-    }
-    
+	}
+
 	async function getHistories() {
 		const { data } = await axios.get(`/history/histories-patient-show`);
 		histories.value = data[0];

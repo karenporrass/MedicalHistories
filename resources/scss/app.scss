@@ -7,7 +7,6 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-
 body {
 	background-color: rgb(236, 244, 250) !important;
 }
@@ -19,4 +18,8 @@ body {
 
 #app {
 	height: 100%;
+}
+.card {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }

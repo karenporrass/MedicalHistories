@@ -79,8 +79,27 @@
 
 	async function getUser() {
 		errors.value = null;
-		user.value = await axios.get(`/user/${document.value}`);
-		history_info.value.patient_id = user.value.data.users[0].id;
+		try {
+			const response = await axios.get(`/user/${document.value}`);
+
+			if (
+				response &&
+				response.data &&
+				response.data.users &&
+				response.data.users.length === 1
+			) {
+				user.value = response.data.users[0].id;
+				history_info.value.patient_id = user.value;
+			} else {
+				Swal.fire({
+					title: "No se puede crear la historia",
+					text: "El usuario no existe",
+					icon: "error",
+				});
+			}
+		} catch (error) {
+			console.error("Error al obtener datos del servidor:", error);
+		}
 	}
 
 	async function saveHistory() {
